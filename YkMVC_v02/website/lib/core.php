@@ -32,5 +32,10 @@ include_once 'Router.php';
 // config
 include CONFIG_PATH . 'config.php';
 // map routes:
-include CONFIG_PATH . 'routes.php';
-Router::checkAndFirteNotFound();
+try{
+	include CONFIG_PATH . 'routes.php';
+	Router::checkAndFirteNotFound();
+}catch (Exception $e){
+	echo "Sorry, there was an error in page...";
+	//echo "<pre>".$e->getMessage().'</pre>';
+}

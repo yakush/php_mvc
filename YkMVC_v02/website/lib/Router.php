@@ -45,7 +45,7 @@ class Router extends Object {
 			}elseif( strpos($uri, dirname($_SERVER['SCRIPT_NAME'])) === 0 ) {
 				$uri = substr($uri, strlen(dirname($_SERVER['SCRIPT_NAME'])));
 			}
-
+			
 			// This section ensures that even on servers that require the URI to be in the query string (Nginx) a correct
 			// URI is found, and also fixes the QUERY_STRING server var and $_GET array.
 			if( strncmp($uri, '?/', 2) === 0 ) {
