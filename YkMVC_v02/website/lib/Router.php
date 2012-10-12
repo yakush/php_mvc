@@ -6,13 +6,13 @@ class Router extends Object {
 	public static $controller='';
 	public static $action = '';
 	
+	private static $notFoundController=null;
+	private static $notFoundAction=null;
+	
 	public $method = '';
 	public $uri = '';
 	
 	
-	
-	private $notFoundController=null;
-	private $notFoundAction=null;
 
 	public function __construct(){
 		$this->uri = $this->getUri();
@@ -73,18 +73,22 @@ class Router extends Object {
 	}
 	
 	public static function setNotFoundAction($controller,$action){
-		$router = static::instance();
-		$router->notFoundController=$controller;
-		$router->notFoundAction=$action;
+		//$router = static::instance();
+		$router = self::instance();
+		self::$notFoundController=$controller;
+		self::$notFoundAction=$action;
 	}
 
 	// map a route
 	public static function map($route,$controller,$action,$defaults=null,$constraints=null,$requireMethod=null) {
-		$router = static::instance();
+		//$router = static::instance();
+		$router = self::instance();
+		
 		$origRoute=$route;
 
 		//check allready found:
-		if (static::$route_found){
+		//if (static::$route_found){
+		if (self::$route_found){
 			return false;
 		}
 
@@ -111,7 +115,8 @@ class Router extends Object {
 
 		// ----------------------
 		// OK - all matched:
-		static::$route_found = true;
+		//static::$route_found = true;
+		self::$route_found = true;
 
 		//replace route-vars ( '{varName}' )  in the route with the actual uri values and put into $_GET:
 		$routeParts = preg_split('@/@', $origRoute); //split route to parts (by '/')
@@ -138,9 +143,10 @@ class Router extends Object {
 	}
 
 	public static function checkAndFirteNotFound(){
-		$router = static::instance();
-		if ($router->notFoundController!=null && $router->notFoundAction!=null && !static::$route_found){
-			$router->dispatch($router->notFoundController,$router->notFoundAction);
+		//$router = static::instance();
+		$router = self::instance();
+		if (self::$notFoundController!=null && self::$notFoundAction!=null && !self::$route_found){
+			$router->dispatch(self::$notFoundController,self::$notFoundAction);
 		}
 	}
 	
@@ -160,10 +166,18 @@ class Router extends Object {
 		*/
 		
 		///
-		static::$controller=$controller;
-		static::$action=$action;
+		$router = self::instance();
 		
-		static::loadController($controller);
+		//static::$controller=$controller;
+		//static::$action=$action;
+		//static::loadController($controller);
+		self::$controller=$controller;
+		self::$action=$action;
+		self::loadController($controller);
+		
+		echo 'controller: ' . self::$controller . '<br>';
+		echo 'action: ' . self::$action . '<br>';
+		
 		
 		$controllerClassName = ucfirst($controller) . 'Controller';
 		if( class_exists($controllerClassName) ) {
