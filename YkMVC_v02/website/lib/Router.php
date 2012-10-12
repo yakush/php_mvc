@@ -175,8 +175,8 @@ class Router extends Object {
 		self::$action=$action;
 		self::loadController($controller);
 		
-		echo 'controller: ' . self::$controller . '<br>';
-		echo 'action: ' . self::$action . '<br>';
+		//echo 'controller: ' . self::$controller . '<br>';
+		//echo 'action: ' . self::$action . '<br>';
 		
 		
 		$controllerClassName = ucfirst($controller) . 'Controller';
