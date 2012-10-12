@@ -6,12 +6,14 @@ if( !empty($_POST['_method']) && in_array($_POST['_method'], array('put', 'delet
 }
 */
 
-include 'object.php';
-include 'controller.php';
-include 'router.php';
+include_once 'Object.php';
+include_once 'Controller.php';
+include_once 'Model.php';
 
+include_once 'Router.php';
 
-
+// config
+include CONFIG_PATH . 'config.php';
 // map routes:
 include CONFIG_PATH . 'routes.php';
 Router::checkAndFirteNotFound();

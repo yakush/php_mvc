@@ -13,6 +13,12 @@ Router::setNotFoundAction("error", "notFound");
 // array('filename'=>'\w+\.xml')
 // );
 
+Router::map(
+'config',
+'user',
+'details'
+
+);
 
 Router::map(
 	'user/{user_id}',

@@ -1,8 +1,5 @@
 <?php
 
-// for use in development mode
-error_reporting(E_ALL);
-
 //pathes:
 define('BASE_PATH', dirname(realpath(__FILE__)) . '/');
 define('APP_PATH', BASE_PATH . 'app/');
@@ -17,5 +14,5 @@ define('MODELS_PATH', APP_PATH . 'models/');
 define('PARTIALS_PATH', APP_PATH . 'partials/');
 define('LAYOUTS_PATH', APP_PATH . 'layouts/');
 
-//core:
+//run MVC core:
 include LIB_PATH . 'core.php';
