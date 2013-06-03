@@ -15,6 +15,7 @@ class ErrorController extends Controller{
 		//test json
 		//$this->renderJSON(array('a'=>123,'b'=>'bbb','inner'=>array('aa'=>1,'bb'=>2)));
 		
+		
 	}
 	
 }
